@@ -16,7 +16,7 @@ Pre-Completion  1.1:
 - Decided not to update the bin folder every version due to the inability to update .java files on Github. TODO Update bin folder
 
 Pre-Completion 1.2:
--Introduced user input with the new class 'Player'
+- Introduced user input with the new class 'Player'
 - Primarily used for player input and validation (linguistic validation and not game validation [e.g. illegal moves will not be handled])
 - Added 2 major methods: askPiece() and askSquare. Both will prompt for input and return a string and an int array(containing an x and y coordinate) respectively.
 - Validations include letter, number, and length checks (also checks for the ' character for black pieces)
