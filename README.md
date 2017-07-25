@@ -13,3 +13,4 @@ Pre-Completion  1.1:
 - Introduced array squareOccupiedByName to store either the piece name or a placeholder ("   "). Unfortunately could not use squareOccupiedBy.getName(), as that would require creating a new Piece subclass solely for the purpose of a placeholder for the square. Using squareOccupiedBy.getName() when the piece is null will return an null pointer error.
 - Updated the board.draw() method with a basic board (that outputs the squareOccupiedByName string for each respective square)
 - Working board.draw() method added (basic without axis labelling)
+- Decided not to update the bin folder every version due to the inability to update .java files on Github. TODO Update bin folder
