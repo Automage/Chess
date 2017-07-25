@@ -18,6 +18,10 @@ public abstract class Piece {
 		return name;
 	}
 	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 	public int getX() {
 		return x;
 	}
