@@ -35,11 +35,15 @@ public class Player {
 		//Input for piece
 		while (check == false) {
 			System.out.println("Piece: ");
-			piece = scanner.nextLine();
+			piece = (scanner.nextLine()).toUpperCase();
 			
 			if (this.getType().equals("White")) {
 				for (int i = 0;i<16;i++) {
-					if (((piece+" ").equalsIgnoreCase(pieceNames[i]))||(piece.equalsIgnoreCase(pieceNames[i]))) {
+					if ((piece+" ").equals(pieceNames[i])) {
+						check = true;
+						piece = piece + " ";
+					}
+					if (piece.equals(pieceNames[i])) {
 						check = true;
 					}
 				}
@@ -76,13 +80,8 @@ public class Player {
 			input = (scanner.nextLine().toUpperCase());
 			
 			//Validation for array length
-			if ((input.length() == 2)||(input.length() == 3)){
-				
-				//increasing array length to avoid array out of bounds error
-				if (input.length() == 2) {
-					input = input + " ";
-				}
-				
+			if ((input.length() == 2)){
+			
 				char[] splitInput = input.toCharArray();
 				
 				//Validation for the first character (the x letter coordinate)
@@ -107,39 +106,43 @@ public class Player {
 				
 				if (check == true) {
 					//Second character validation (y axis number)
-					if ((Character.getNumericValue(splitInput[1])>0)&&(Character.getNumericValue(splitInput[1])<9)){		
-						y= Character.getNumericValue(splitInput[1]-1);
-						check = true;
-						//Third character validation (' for black pieces)
-						if ((this.getType().equals("Black"))&&(!((Character.toString(splitInput[2])).equals("'")))){
-							check = false;
+					switch (splitInput[1]) {
+						case '1': check = true; y = 0;
+						break;
+						case '2': check = true; y = 1;
+						break;
+						case '3': check = true; y = 2;
+						break;
+						case '4': check = true; y = 3;
+						break;
+						case '5': check = true; y = 4;
+						break;
+						case '6': check = true; y = 5;
+						break;
+						case '7': check = true; y = 6;
+						break;
+						case '8': check = true; y = 7;
+						break;	
+						default: 
+							check = false; 
 							System.out.println("Invalid square");
-						}
-						else if (!((Character.toString(splitInput[2])).equals(" "))) {
-							check = false;
-							System.out.println("Invalid square");
-						}
+						break;
 					}
-					else {
-						check = false;
-						System.out.println("Invalid square");
-					}
-				} 
+					
+				}
 				else {
 					check = false;
 					System.out.println("Invalid square");
 				}
 				
-			}
+			} 
 			else {
 				check = false;
 				System.out.println("Invalid square");
 			}
-			
-			
+				
 		}
 		
-		//Filling and returning the array
 		xy[0]=x;
 		xy[1]=y;
 		return xy;
