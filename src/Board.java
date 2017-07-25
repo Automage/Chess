@@ -5,6 +5,7 @@ public class Board {
 	static boolean[][] squareOccupied = new boolean[8][8];
 	static Piece[][] squareOccupiedBy = new Piece[8][8];
 	static String[][] squareOccupiedByName = new String[8][8];
+	private static boolean moveValidity;
 	
 	//Creating White Pieces
 	Piece[] whitePieces = new Piece[8];
@@ -96,7 +97,6 @@ public class Board {
 	
 	public void draw() {
 
-		
 		for (int y = 7; y>=0;y--) {
 			System.out.println("---------------------------------------------------------");
 			for (int x = 0;x<8;x++) {
@@ -110,6 +110,80 @@ public class Board {
 
 	public void move(String piece, int[] xy) {
 		
+		boolean check = false; 
+		boolean isValid = false;
+		int i = 0;
+		
+		
+		while (check == false) {
+			if (piece.equals(whitePieces[i].getName())) {
+				check = true;
+				isValid = process(whitePieces[i], xy, whitePieces[i].getPossibleSquares());
+				if (isValid == true) {
+					whitePieces[i].setX(xy[0]);
+					whitePieces[i].setY(xy[1]);
+				}
+				else {
+					System.out.println("Invalid move");
+					return;
+				}
+			} 
+			else if (piece.equals(whitePawns[i].getName())) {
+				check = true;
+				isValid = process(whitePawns[i], xy, whitePawns[i].getPossibleSquares());
+				if (isValid == true) {
+					whitePawns[i].setX(xy[0]);
+					whitePawns[i].setY(xy[1]);
+				}
+				else {
+					System.out.println("Invalid move");
+					return;
+				}
+			}
+			else if (piece.equals(blackPieces[i].getName())) {
+				check = true;
+				isValid = process(blackPieces[i], xy, blackPieces[i].getPossibleSquares());
+				if (isValid == true) {
+					blackPieces[i].setX(xy[0]);
+					blackPieces[i].setY(xy[1]);
+				}
+				else {
+					System.out.println("Invalid move");
+					return;
+				}
+			}
+			else if (piece.equals(blackPawns[i].getName())){
+				check = true;
+				isValid = process(blackPawns[i], xy, blackPawns[i].getPossibleSquares());
+				if (isValid == true) {
+					blackPawns[i].setX(xy[0]);
+					blackPawns[i].setY(xy[1]);
+				}
+				else {
+					System.out.println("Invalid move");
+					return;
+				}
+			}
+			i++;
+		}
+		
+		
+	}
+	
+	Boolean process(Piece piece, int[] xy, String[] possibleSquares) {
+		moveValidity = true;
+		return true;
+		/* Must consider:
+		 * - piece movement rules
+		 * - whether the square is occupied by a friendly piece or foe
+		 * - obstacle pieces
+		 * - isDead?
+		 * - King killed?
+		 */
+	}
+
+	public boolean getValidity() {
+		return moveValidity;
 	}
 	
 	public String[] getPieceNames() {
