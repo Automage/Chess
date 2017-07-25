@@ -14,3 +14,10 @@ Pre-Completion  1.1:
 - Updated the board.draw() method with a basic board (that outputs the squareOccupiedByName string for each respective square)
 - Working board.draw() method added (basic without axis labelling)
 - Decided not to update the bin folder every version due to the inability to update .java files on Github. TODO Update bin folder
+
+Pre-Completion 1.2:
+-Introduced user input with the new class 'Player'
+- Primarily used for player input and validation (linguistic validation and not game validation [e.g. illegal moves will not be handled])
+- Added 2 major methods: askPiece() and askSquare. Both will prompt for input and return a string and an int array(containing an x and y coordinate) respectively.
+- Validations include letter, number, and length checks (also checks for the ' character for black pieces)
+- Placeholder move() method created in the Board class
