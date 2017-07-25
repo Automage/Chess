@@ -6,6 +6,7 @@ public class Chess {
 		Board board = new Board();
 		
 		board.create();
+		board.update();
 		board.draw();
 
 	}
