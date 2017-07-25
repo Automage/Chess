@@ -21,3 +21,10 @@ Pre-Completion 1.2:
 - Added 2 major methods: askPiece() and askSquare. Both will prompt for input and return a string and an int array(containing an x and y coordinate) respectively.
 - Validations include letter, number, and length checks (also checks for the ' character for black pieces)
 - Placeholder move() method created in the Board class
+
+Pre-Completion 1.3:
+- Added a temporary loop to test player input
+- Created a process() method placeholder. Will be used to call the getPossibleSquare() from the piece's respective class (which only produces potential squares based on the piece's location, with no respect for other pieces). The process() method will take the potential squares and eliminate squares based on factors such as: square occupancy, obstacle pieces, whether the piece is captured or not, or even if a king is killed
+- Added a move() method which uses the process() placeholder method to update the piece's square location (update() must be used after to translate this change for the draw() method).
+- Improved askSquare() validation (stopped inputs such as 'eg' being validated [and all other instances where the first digit is {A-E} but the second character being disregarded])
+- Removed the array length validation for being 3 characters long (as all squares can be expressed with 2 characters) [Silly Mistake]
