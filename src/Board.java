@@ -95,8 +95,9 @@ public class Board {
 	}
 	
 	public void draw() {
+
 		
-		for (int y = 0; y<8;y++) {
+		for (int y = 7; y>=0;y--) {
 			System.out.println("---------------------------------------------------------");
 			for (int x = 0;x<8;x++) {
 				System.out.print("|  "+squareOccupiedByName[x][y]+" ");
@@ -106,5 +107,35 @@ public class Board {
 		System.out.println("---------------------------------------------------------");
 		
 	}
+
+	public void move(String piece, int[] xy) {
+		
+	}
+	
+	public String[] getPieceNames() {
+		
+		String[] pieceNames = new String[32];
+		int g = 0;
+		
+		for (int i = 0;i < 8;i++) {
+			pieceNames[g] = whitePieces[i].getName();
+			g++;
+		}
+		for (int i = 0;i < 8;i++) {
+			pieceNames[g] = whitePawns[i].getName();
+			g++;
+		}
+		for (int i = 0;i < 8;i++) {
+			pieceNames[g] = blackPieces[i].getName();
+			g++;
+		}
+		for (int i = 0;i < 8;i++) {
+			pieceNames[g] = blackPawns[i].getName();
+			g++;
+		}
+		
+		return pieceNames;
+	}
+
 	
 }
