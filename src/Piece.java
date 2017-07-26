@@ -2,13 +2,15 @@
 public abstract class Piece {
 
 	String name = new String(); 
+	String type = new String();
 	int x;
 	int y;
 	boolean isDead = false;
 	
 
-	public Piece(String name, int x, int y) {
+	public Piece(String name, int x, int y, String type) {
 		this.name = name;
+		this.type = type;
 		this.x = x;
 		this.y = y;
 		
@@ -22,6 +24,14 @@ public abstract class Piece {
 		this.name = name;
 	}
 	
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
 	public int getX() {
 		return x;
 	}
@@ -38,7 +48,7 @@ public abstract class Piece {
 		this.y = y;
 	}
 	
-	public boolean isDead() {
+	public boolean getDead() {
 		return isDead;
 	}
 
