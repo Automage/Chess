@@ -2,8 +2,8 @@ import java.util.ArrayList;
 
 public class Queen extends Piece{
 
-	public Queen(String name, int x, int y) {
-		super(name,x,y);
+	public Queen(String name, int x, int y, String type) {
+		super(name,x,y,type);
 	}
 
 	@Override
