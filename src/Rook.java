@@ -2,8 +2,8 @@ import java.util.ArrayList;
 
 public class Rook extends Piece{
 
-	public Rook(String name, int x, int y) {
-		super(name,x,y);
+	public Rook(String name, int x, int y, String type) {
+		super(name,x,y,type);
 	}
 
 	@Override
@@ -16,7 +16,7 @@ public class Rook extends Piece{
 		
 		/*			1
 		 * 			|
-		 * 		4 - - -	R - - - 2
+		 * 	4 -	- -	R - - - 2
 		 * 			|
 		 * 			3
 		 */			
