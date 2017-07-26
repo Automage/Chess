@@ -48,7 +48,6 @@ public class Board {
 	
 	public void update() {
 		
-		String name = "";
 		int x,y = 0;
 		
 		//Nullify the whole board (removes the need to check every square for a piece)
@@ -64,28 +63,24 @@ public class Board {
 		for (int i = 0;i<8;i++){
 			
 			//White pieces
-			name = whitePieces[i].getName();
 			x = whitePieces[i].getX();
 			y = whitePieces[i].getY();
 			squareOccupied[x][y] = true;
 			squareOccupiedBy[x][y] = whitePieces[i];
 			squareOccupiedByName[x][y] = whitePieces[i].getName();
 			//White pawns
-			name = whitePawns[i].getName();
 			x = whitePawns[i].getX();
 			y = whitePawns[i].getY();
 			squareOccupied[x][y] = true;
 			squareOccupiedBy[x][y] = whitePawns[i];
 			squareOccupiedByName[x][y] = whitePawns[i].getName();
 			//Black pieces
-			name = blackPieces[i].getName();
 			x = blackPieces[i].getX();
 			y = blackPieces[i].getY();
 			squareOccupied[x][y] = true;
 			squareOccupiedBy[x][y] = blackPieces[i];
 			squareOccupiedByName[x][y] = blackPieces[i].getName();
 			//Black pawns
-			name = blackPawns[i].getName();
 			x = blackPawns[i].getX();
 			y = blackPawns[i].getY();
 			squareOccupied[x][y] = true;
@@ -118,7 +113,7 @@ public class Board {
 		while (check == false) {
 			if (piece.equals(whitePieces[i].getName())) {
 				check = true;
-				isValid = process(whitePieces[i], xy, whitePieces[i].getPossibleSquares());
+				isValid = process(whitePieces[i], xy, whitePieces[i].getPossibleSquares(whitePieces[i].getX(), whitePieces[i].getY(), "White"));
 				if (isValid == true) {
 					whitePieces[i].setX(xy[0]);
 					whitePieces[i].setY(xy[1]);
@@ -130,7 +125,7 @@ public class Board {
 			} 
 			else if (piece.equals(whitePawns[i].getName())) {
 				check = true;
-				isValid = process(whitePawns[i], xy, whitePawns[i].getPossibleSquares());
+				isValid = process(whitePawns[i], xy, whitePawns[i].getPossibleSquares(whitePawns[i].getX(), whitePawns[i].getY(), "White"));
 				if (isValid == true) {
 					whitePawns[i].setX(xy[0]);
 					whitePawns[i].setY(xy[1]);
@@ -142,7 +137,7 @@ public class Board {
 			}
 			else if (piece.equals(blackPieces[i].getName())) {
 				check = true;
-				isValid = process(blackPieces[i], xy, blackPieces[i].getPossibleSquares());
+				isValid = process(blackPieces[i], xy, blackPieces[i].getPossibleSquares(blackPieces[i].getX(), blackPieces[i].getY(), "Black"));
 				if (isValid == true) {
 					blackPieces[i].setX(xy[0]);
 					blackPieces[i].setY(xy[1]);
@@ -154,7 +149,7 @@ public class Board {
 			}
 			else if (piece.equals(blackPawns[i].getName())){
 				check = true;
-				isValid = process(blackPawns[i], xy, blackPawns[i].getPossibleSquares());
+				isValid = process(blackPawns[i], xy, blackPawns[i].getPossibleSquares(blackPawns[i].getX(), blackPawns[i].getY(), "Black"));
 				if (isValid == true) {
 					blackPawns[i].setX(xy[0]);
 					blackPawns[i].setY(xy[1]);
@@ -171,10 +166,37 @@ public class Board {
 	}
 	
 	Boolean process(Piece piece, int[] xy, String[] possibleSquares) {
-		moveValidity = true;
-		return true;
+		
+		moveValidity = false;
+		boolean check = false;
+		int i = 0;
+		
+		//Monitoring purposes
+		for (int a = 0; a<possibleSquares.length;a++) {
+			System.out.println(possibleSquares[a]);
+		}
+		
+		//Checks whether the players square choice matches a possible square
+		while ((check == false) && (i<possibleSquares.length)) {
+			if ((Board.getSquareString(xy[0], xy[1])).equals(possibleSquares[i])) {
+				check = true;
+			}
+			else {
+				i++;
+			}
+		}
+		
+		if (check == false) {
+			moveValidity = false;
+		}
+		else {
+			//rest of the checking
+			moveValidity = true; 
+		}
+		
+		return moveValidity;
+		
 		/* Must consider:
-		 * - piece movement rules
 		 * - whether the square is occupied by a friendly piece or foe
 		 * - obstacle pieces
 		 * - isDead?
@@ -187,6 +209,7 @@ public class Board {
 	}
 	
 	public String[] getPieceNames() {
+
 		
 		String[] pieceNames = new String[32];
 		int g = 0;
@@ -211,5 +234,36 @@ public class Board {
 		return pieceNames;
 	}
 
-	
+
+	public static String getSquareString(int squareX, int squareY) {
+		
+		String x = "", y = "", squareName = "";
+		
+		//x square conversion
+		switch (squareX)  {
+		case 0: x = "A";
+		break;
+		case 1: x = "B";
+		break;
+		case 2: x = "C";
+		break;
+		case 3: x = "D";
+		break;
+		case 4: x = "E";
+		break;
+		case 5: x = "F";
+		break;
+		case 6: x = "G";
+		break;
+		case 7: x = "H";
+		break;
+		}
+		
+		//y square conversion
+		y = ""+(squareY + 1);
+		
+		squareName = x+y;
+		
+		return squareName;
+	}
 }
