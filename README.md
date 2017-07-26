@@ -52,6 +52,7 @@ Pre-completion 1.6:
 - Captured pieces are no longer outputted (due to changes in the update() method in Board)
 - General output cleanups (new lines, etc.)
 - YOU CAN PLAY THE GAME NOW (considering you manually adhere to the rules)
+- Updated bin folder (downloadable zip can now be made to run)
 
 TODO Features:
 - Convert move summaries into standard chess notation and produce a log file after every game
