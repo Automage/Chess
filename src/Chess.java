@@ -52,12 +52,7 @@ public class Chess {
 		}
 		
 		System.out.println("gg");
-		
-		
-		
-		
-		
-		
+	
 
-}
+	}
 }
