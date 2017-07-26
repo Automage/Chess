@@ -46,5 +46,7 @@ public abstract class Piece {
 		this.isDead = isDead;
 	}
 	
+	//Only looks at position and outputs possible moves without considering other pieces
+	public abstract String[] getPossibleSquares(int x, int y, String type);
 	
 }
