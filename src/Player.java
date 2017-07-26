@@ -28,13 +28,12 @@ public class Player {
 		
 		String piece = "";
 		boolean check = false;
-		int a = 0;
 		
 		System.out.println(this.getType() + "'s turn");
 		
 		//Input for piece
 		while (check == false) {
-			System.out.println("Piece: ");
+			System.out.print("Piece: ");
 			piece = (scanner.nextLine()).toUpperCase();
 			
 			if (this.getType().equals("White")) {
@@ -57,7 +56,7 @@ public class Player {
 			}	
 			
 			if (check == false) {
-				System.out.println("Invalid piece"+'\n');
+				System.out.println("Invalid piece\n");
 			}
 		}
 		
@@ -76,7 +75,7 @@ public class Player {
 		//Input + Validation
 		while (check == false) {
 			
-			System.out.println("Square: ");
+			System.out.print("Square: ");
 			input = (scanner.nextLine().toUpperCase());
 			
 			//Validation for array length
@@ -125,20 +124,20 @@ public class Player {
 						break;	
 						default: 
 							check = false; 
-							System.out.println("Invalid square");
+							System.out.println("Invalid square\n");
 						break;
 					}
 					
 				}
 				else {
 					check = false;
-					System.out.println("Invalid square");
+					System.out.println("Invalid square\n");
 				}
 				
 			} 
 			else {
 				check = false;
-				System.out.println("Invalid square");
+				System.out.println("Invalid square\n");
 			}
 				
 		}
