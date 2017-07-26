@@ -32,7 +32,11 @@ Pre-Completion 1.3:
 Pre-Completion 1.4:
 - Created abstract method getPossibleSquares() in the Piece Superclass. Will be used to produce possible squares for each piece depending on their position on the board
 - So far the Pawn, King, and Knight class have overriden the getPossibleSquares method. Notice these pieces are the ones with limited movement capabilties, the next update will focus on the pieces with unlimited movement capabilties (i.e. Queen, Bishop and Rook)
-- -The getPossibleSquares() now takes parameters (x,y,type[black or white])
+- The getPossibleSquares() now takes parameters (x,y,type[black or white])
 - Updated the process() method with a basic validation that checks whether the inputted square matches a square from the possibleSquares array (obtained from the getPossibleSquares() method (in the move() method) from the respective Piece class)
 - Added a temporary monitor that outputs all the values of the possibleSquares array
 - Added the static method getSquareString() in order to convert an x and y value to a square string (e.g. x=2, y=3 becomes "C4"). Used in the getPossibleSquare() method in each Piece class
+
+Pre-completion 1.5:
+- Override getPossibleSquares() for pieces with unlimited movement capabilites (Queen, Rook, Bishop)
+- Game can now run, however without any hit detection (also the pawns' unique movement has not been accounted for yet)
