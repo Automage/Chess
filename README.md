@@ -40,3 +40,20 @@ Pre-Completion 1.4:
 Pre-completion 1.5:
 - Override getPossibleSquares() for pieces with unlimited movement capabilites (Queen, Rook, Bishop)
 - Game can now run, however without any hit detection (also the pawns' unique movement has not been accounted for yet)
+
+Pre-completion 1.6: 
+- Hit detection!
+- Checkmate detection!
+- Game can terminate now!
+- General output cleanup
+- Turn counter added
+- Still does not detect obstacles (all pieces basically jump over all other pieces).
+- Process() method now outputs turn summaries (movement and captures)
+- Captured pieces are no longer outputted (due to changes in the update() method in Board)
+- General output cleanups (new lines, etc.)
+- YOU CAN PLAY THE GAME NOW (considering you manually adhere to the rules)
+
+TODO Features:
+- Convert move summaries into standard chess notation and produce a log file after every game
+- Coordinate labelling
+- Color text???
