@@ -3,11 +3,16 @@ public class Chess {
 
 	public static void main(String[] args) {
 		
+		System.out.println("Chess by Pman");
+		System.out.println("https://github.com/Automage/Chess");
+		
 		//Initialization
+		System.out.print("\nInitializing... ");
 		
 		Board board = new Board();
 		boolean kingDown = false;
 		boolean proceed = false;
+		int turn = 1;
 		//Creating Players
 		Player playerWhite = new Player("White");
 		Player playerBlack = new Player("Black");
@@ -16,41 +21,57 @@ public class Chess {
 		int[] xy = new int[2];
 	
 		board.create();
-		board.update();
-		board.draw();
+		board.update();	
 		Player.pieceNames = board.getPieceNames();
 		
-		//GAME START
+		System.out.println("Done");
 		
+		//GAME START
 		while (kingDown == false) {
 			
+			System.out.println("\nTurn "+turn);
+			board.update();
+			board.draw();
+			proceed = false;
+			
 			//White's turn
+			
 			while (proceed == false) {
 					
 				piece = playerWhite.askPiece();
 				xy = playerWhite.askSquare();
 				board.move(piece, xy);
 				proceed = board.getValidity();
+				kingDown = Board.getKingDead();
 			}
-						
-			board.update();
-			board.draw();
-			proceed = false;
 			
-			//Black's turn
-			while (proceed == false) {
+			if (kingDown == false) {
 				
-				piece = playerBlack.askPiece();
-				xy = playerBlack.askSquare();
-				board.move(piece, xy);
-				proceed = board.getValidity();
-			}
+				turn++;
+				System.out.println("\nTurn "+turn);
+				board.update();
+				board.draw();
+				proceed = false;	
+				
+				//Black's turn
+				while (proceed == false) {
+					
+					piece = playerBlack.askPiece();
+					xy = playerBlack.askSquare();
+					board.move(piece, xy);
+					proceed = board.getValidity();
+					kingDown = Board.getKingDead();
+				}
+				proceed = false;	
+				turn++;
+			}	
 			
-			board.update();
-			board.draw();
-			proceed = false;
 		}
 		
+		board.update();
+		board.draw();
+		System.out.println("\nCheckmate!");
+		System.out.println(Board.getWinner()+" wins after "+turn+" turns");
 		System.out.println("gg");
 	
 
