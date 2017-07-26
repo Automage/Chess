@@ -28,3 +28,11 @@ Pre-Completion 1.3:
 - Added a move() method which uses the process() placeholder method to update the piece's square location (update() must be used after to translate this change for the draw() method).
 - Improved askSquare() validation (stopped inputs such as 'eg' being validated [and all other instances where the first digit is {A-E} but the second character being disregarded])
 - Removed the array length validation for being 3 characters long (as all squares can be expressed with 2 characters) [Silly Mistake]
+
+Pre-Completion 1.4:
+- Created abstract method getPossibleSquares() in the Piece Superclass. Will be used to produce possible squares for each piece depending on their position on the board
+- So far the Pawn, King, and Knight class have overriden the getPossibleSquares method. Notice these pieces are the ones with limited movement capabilties, the next update will focus on the pieces with unlimited movement capabilties (i.e. Queen, Bishop and Rook)
+- -The getPossibleSquares() now takes parameters (x,y,type[black or white])
+- Updated the process() method with a basic validation that checks whether the inputted square matches a square from the possibleSquares array (obtained from the getPossibleSquares() method (in the move() method) from the respective Piece class)
+- Added a temporary monitor that outputs all the values of the possibleSquares array
+- Added the static method getSquareString() in order to convert an x and y value to a square string (e.g. x=2, y=3 becomes "C4"). Used in the getPossibleSquare() method in each Piece class
