@@ -2,8 +2,8 @@ import java.util.ArrayList;
 
 public class Bishop extends Piece{
 
-	public Bishop(String name, int x, int y) {
-		super(name,x,y);
+	public Bishop(String name, int x, int y, String type) {
+		super(name,x,y,type);
 	}
 
 	@Override
