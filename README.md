@@ -54,7 +54,9 @@ Pre-completion 1.6:
 - YOU CAN PLAY THE GAME NOW (considering you manually adhere to the rules)
 - Updated bin folder (downloadable zip can now be made to run)
 
+
 TODO Features:
 - Convert move summaries into standard chess notation and produce a log file after every game
 - Coordinate labelling
 - Color text???
+
