@@ -36,28 +36,37 @@ public class Player {
 			System.out.print("Piece: ");
 			piece = (scanner.nextLine()).toUpperCase();
 			
-			if (this.getType().equals("White")) {
-				for (int i = 0;i<16;i++) {
-					if ((piece+" ").equals(pieceNames[i])) {
-						check = true;
-						piece = piece + " ";
-					}
-					if (piece.equals(pieceNames[i])) {
-						check = true;
+			if (!(piece.equalsIgnoreCase("end"))) {
+				
+				if (this.getType().equals("White")) {
+					for (int i = 0;i<16;i++) {
+						if ((piece+" ").equals(pieceNames[i])) {
+							check = true;
+							piece = piece + " ";
+						}
+						if (piece.equals(pieceNames[i])) {
+							check = true;
+						}
 					}
 				}
+				else {
+					for (int i = 16;i<32;i++) {
+						if ((piece).equalsIgnoreCase(pieceNames[i])) {
+							check = true;
+						}
+					}
+				}	
+				
+				if (check == false) {
+					System.out.println("Invalid piece\n");
+				}
+				
 			}
 			else {
-				for (int i = 16;i<32;i++) {
-					if ((piece).equalsIgnoreCase(pieceNames[i])) {
-						check = true;
-					}
-				}
-			}	
-			
-			if (check == false) {
-				System.out.println("Invalid piece\n");
+				Chess.setEarlyTerminate(true);
+				check = true;
 			}
+			
 		}
 		
 		return piece;	
@@ -78,68 +87,76 @@ public class Player {
 			System.out.print("Square: ");
 			input = (scanner.nextLine().toUpperCase());
 			
-			//Validation for array length
-			if ((input.length() == 2)){
-			
-				char[] splitInput = input.toCharArray();
+			if (!(input.equals("END"))) {
 				
-				//Validation for the first character (the x letter coordinate)
-				switch (splitInput[0]) {
-					case 'A': check = true; x = 0;
-					break;
-					case 'B': check = true; x = 1;
-					break;
-					case 'C': check = true; x = 2;
-					break;
-					case 'D': check = true; x = 3;
-					break;
-					case 'E': check = true; x = 4;
-					break;
-					case 'F': check = true; x = 5;
-					break;
-					case 'G': check = true; x = 6;
-					break;
-					case 'H': check = true; x = 7;
-					break;		
-				}
+				//Validation for array length
+				if ((input.length() == 2)){
 				
-				if (check == true) {
-					//Second character validation (y axis number)
-					switch (splitInput[1]) {
-						case '1': check = true; y = 0;
+					char[] splitInput = input.toCharArray();
+					
+					//Validation for the first character (the x letter coordinate)
+					switch (splitInput[0]) {
+						case 'A': check = true; x = 0;
 						break;
-						case '2': check = true; y = 1;
+						case 'B': check = true; x = 1;
 						break;
-						case '3': check = true; y = 2;
+						case 'C': check = true; x = 2;
 						break;
-						case '4': check = true; y = 3;
+						case 'D': check = true; x = 3;
 						break;
-						case '5': check = true; y = 4;
+						case 'E': check = true; x = 4;
 						break;
-						case '6': check = true; y = 5;
+						case 'F': check = true; x = 5;
 						break;
-						case '7': check = true; y = 6;
+						case 'G': check = true; x = 6;
 						break;
-						case '8': check = true; y = 7;
-						break;	
-						default: 
-							check = false; 
-							System.out.println("Invalid square\n");
-						break;
+						case 'H': check = true; x = 7;
+						break;		
 					}
 					
-				}
+					if (check == true) {
+						//Second character validation (y axis number)
+						switch (splitInput[1]) {
+							case '1': check = true; y = 0;
+							break;
+							case '2': check = true; y = 1;
+							break;
+							case '3': check = true; y = 2;
+							break;
+							case '4': check = true; y = 3;
+							break;
+							case '5': check = true; y = 4;
+							break;
+							case '6': check = true; y = 5;
+							break;
+							case '7': check = true; y = 6;
+							break;
+							case '8': check = true; y = 7;
+							break;	
+							default: 
+								check = false; 
+								System.out.println("Invalid square\n");
+							break;
+						}
+						
+					}
+					else {
+						check = false;
+						System.out.println("Invalid square\n");
+					}
+					
+				} 
 				else {
 					check = false;
 					System.out.println("Invalid square\n");
 				}
 				
-			} 
-			else {
-				check = false;
-				System.out.println("Invalid square\n");
 			}
-				
+			else { //END termination request
+				check = true;
+				Chess.setEarlyTerminate(true);
+			}
+		
 		}
 		
 		xy[0]=x;
