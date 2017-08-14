@@ -39,6 +39,16 @@ public class Pawn extends Piece{
 					yMod = yMod + 1;
 					possibleSquares.add(Board.getSquareString(xMod,yMod));
 				}
+				
+				//Extended movement if pawn is on original row
+				if (y==1) {
+					xMod = x;
+					yMod = y;
+					
+					yMod = yMod + 2;
+					possibleSquares.add(Board.getSquareString(xMod,yMod));
+				}
+				
 			}
 			
 		}
@@ -68,6 +78,16 @@ public class Pawn extends Piece{
 					yMod = yMod - 1;
 					possibleSquares.add(Board.getSquareString(xMod,yMod));
 				}
+				
+				//Extended movement if pawn is on original row
+				if (y==6) {
+					xMod = x;
+					yMod = y;
+					
+					yMod = yMod - 2;
+					possibleSquares.add(Board.getSquareString(xMod,yMod));
+				}
+				
 			}
 		}
 		
