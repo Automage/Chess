@@ -54,9 +54,19 @@ Pre-completion 1.6:
 - YOU CAN PLAY THE GAME NOW (considering you manually adhere to the rules)
 - Updated bin folder (downloadable zip can now be made to run)
 
+Pre-completion 1.7:
+- Obstacle detection (finally!)
+- obstacleCheck() method based on the identification of the piece's direction of movement, which then consequently checks all squares in that path for obstacles. 
+- Turn counting fixed
+- Added a canJump property to all Piece classes (in case anyone wants to create a custom piece that has jumping abilities)
+- Pawn's unique capture style yet to be implemented
+- Should be the last pre-completion version before v1.0 (castling and 'Check' check was never part of my original plan
+
 
 TODO Features:
 - Convert move summaries into standard chess notation and produce a log file after every game
 - Coordinate labelling
 - Color text???
+- Castling
+- 'Check' check
 
