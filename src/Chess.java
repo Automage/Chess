@@ -1,6 +1,12 @@
 
 public class Chess {
 
+	public static boolean earlyTerminate = false;
+	
+	public static void setEarlyTerminate(boolean earlyTerminate) {
+		Chess.earlyTerminate = earlyTerminate;
+	}
+
 	public static void main(String[] args) {
 		
 		System.out.println("Chess by Pman");
@@ -23,11 +29,12 @@ public class Chess {
 		board.create();
 		board.update();	
 		Player.pieceNames = board.getPieceNames();
+		Chess.setEarlyTerminate(false);
 		
 		System.out.println("Done");
 		
 		//GAME START
-		while (kingDown == false) {
+		while ((earlyTerminate == false)&&(kingDown == false)) {
 			
 			if (turn!=0) {
 				System.out.println("\nTurn "+turn+" Summary");
@@ -41,13 +48,27 @@ public class Chess {
 			while (proceed == false) {
 					
 				piece = playerWhite.askPiece();
-				xy = playerWhite.askSquare();
-				board.move(piece, xy);
-				proceed = board.getValidity();
-				kingDown = Board.getKingDead();
+				
+				if (earlyTerminate == false) {				
+					xy = playerWhite.askSquare();
+					
+					if (earlyTerminate == false) {
+						board.move(piece, xy);
+						proceed = board.getValidity();
+						kingDown = Board.getKingDead();
+					}
+					else {
+						proceed=true;
+					}
+					
+				}
+				else {
+					proceed=true;
+				}
+
 			}
 			
-			if (kingDown == false) {
+			if ((earlyTerminate == false)&&(kingDown == false)) {
 				
 				turn++;
 				System.out.println("\nTurn "+turn+" Summary");
@@ -59,10 +80,24 @@ public class Chess {
 				while (proceed == false) {
 					
 					piece = playerBlack.askPiece();
-					xy = playerBlack.askSquare();
-					board.move(piece, xy);
-					proceed = board.getValidity();
-					kingDown = Board.getKingDead();
+					
+					if (earlyTerminate == false) {
+						xy = playerBlack.askSquare();
+						
+						if (earlyTerminate == false) {
+							board.move(piece, xy);
+							proceed = board.getValidity();
+							kingDown = Board.getKingDead();
+						}
+						else {
+							proceed=true;
+						}
+						
+					}
+					else {
+						proceed=true;
+					}
+
 				}
 				proceed = false;	
 				turn++;
@@ -70,12 +105,16 @@ public class Chess {
 			
 		}
 		
-		board.update();
-		board.draw();
-		System.out.println("\nCheckmate!");
-		System.out.println(Board.getWinner()+" wins after "+turn+" turns");
-		System.out.println("gg");
-	
-
+		if (earlyTerminate == true) {
+			System.out.println("\n\nProgram Terminated");
+		}
+		else {
+			board.update();
+			board.draw();
+			System.out.println("\nCheckmate!");
+			System.out.println(Board.getWinner()+" wins after "+turn+" turns");
+			System.out.println("gg");
+		
+		}
 	}
 }

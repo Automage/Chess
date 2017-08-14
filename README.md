@@ -74,13 +74,16 @@ Pre-completion 1.7:
 - Should be the last pre-completion version before v1.0 (castling and 'Check' check was never part of my original plan
 - Added a runnable jar file
 
+Pre-completion 1.8:
+-Completed a couple of TODO features in prepartion for v1.0
+- Finished: Type 'end' to terminate program
+- Finished: Coordinate labelling
+- Implemented the extended movement of the pawn piece when it is on its original square
+- Last addition to make is the unique capture style of the pawn (should be in the next update)
 
 TODO Features:
 - Convert move summaries into standard chess notation and produce a log file after every game
-- Coordinate labelling
 - Color text???
 - Castling
 - 'Check' check
 - Label squares with a 'x' for possible next moves
-- type 'end' to terminate program
-
