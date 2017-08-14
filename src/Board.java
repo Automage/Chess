@@ -108,13 +108,15 @@ public class Board {
 		
 		System.out.println();
 		for (int y = 7; y>=0;y--) {
-			System.out.println("---------------------------------------------------------");
+			System.out.println("   ---------------------------------------------------------");
+			System.out.print(" "+(y+1)+" ");
 			for (int x = 0;x<8;x++) {
 				System.out.print("|  "+squareOccupiedByName[x][y]+" ");
 			}
 			System.out.print("|"+'\n');
 		}
-		System.out.println("---------------------------------------------------------");
+		System.out.println("   ---------------------------------------------------------");
+		System.out.println("      A      B      C      D       E      F      G      H   \n");
 		
 	}
 
@@ -188,11 +190,6 @@ public class Board {
 		boolean inputCheck = false;
 		int i = 0;		
 
-		for (int c =0;c<possibleSquares.length;c++) {
-			System.out.print(possibleSquares[c]+" ");
-		}
-		
-		
 		//Checks whether the players square choice matches a possible square
 		while ((inputCheck == false) && (i<possibleSquares.length)) {
 			if ((Board.getSquareString(xy[0], xy[1])).equals(possibleSquares[i])) {
@@ -480,7 +477,6 @@ public class Board {
 		}
 		else {
 			obstacleCheck = true; 
-			System.out.println("Obstacle Jumped");
 		}
 		
 		if (obstacle ==0) {
