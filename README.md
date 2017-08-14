@@ -1,6 +1,13 @@
 # Chess
 Trying my hand at building Chess in Java using my knowledge of OOP so far. 
 
+#Running the Runnable JAR file 
+(assuming you have a java installed)
+MacOS:
+1) Open Terminal 
+2) Type in 'java -jar *jar destination*' (For example: java -jar /Users/Automage/Desktop/Chess.jar) (alternatively you could drag the jar file into the Terminal window to insert its destination automatically)
+3) Profit
+
 Pre-Completion 1.0:
 - Abstract class 'Piece' created 
 - Pawn, Rook, Knight, Bishop, King and Queen classes created and extends 'Piece' with parameters name, x, y, and isDead
@@ -61,6 +68,7 @@ Pre-completion 1.7:
 - Added a canJump property to all Piece classes (in case anyone wants to create a custom piece that has jumping abilities)
 - Pawn's unique capture style yet to be implemented
 - Should be the last pre-completion version before v1.0 (castling and 'Check' check was never part of my original plan
+- Added a runnable jar file
 
 
 TODO Features:
@@ -70,4 +78,5 @@ TODO Features:
 - Castling
 - 'Check' check
 - Label squares with a 'x' for possible next moves
+- type 'end' to terminate program
 
