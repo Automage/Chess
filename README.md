@@ -69,4 +69,5 @@ TODO Features:
 - Color text???
 - Castling
 - 'Check' check
+- Label squares with a 'x' for possible next moves
 
