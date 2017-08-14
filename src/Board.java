@@ -1,4 +1,3 @@
-
 public class Board {
 	
 	static int[][] boardCoordinates = new int[8][8];
@@ -129,49 +128,49 @@ public class Board {
 		while (check == false) {
 			if (piece.equals(whitePieces[i].getName())) {
 				check = true;
-				isValid = process(whitePieces[i], xy, whitePieces[i].getPossibleSquares(whitePieces[i].getX(), whitePieces[i].getY(), "White"), whitePieces[i].getType());
+				isValid = process(whitePieces[i], xy);
 				if (isValid == true) {
 					whitePieces[i].setX(xy[0]);
 					whitePieces[i].setY(xy[1]);
 				}
 				else {
-					System.out.println("Invalid move\n");
+					System.out.println("Retry\n");
 					return;
 				}
 			} 
 			else if (piece.equals(whitePawns[i].getName())) {
 				check = true;
-				isValid = process(whitePawns[i], xy, whitePawns[i].getPossibleSquares(whitePawns[i].getX(), whitePawns[i].getY(), "White"), whitePawns[i].getType());
+				isValid = process(whitePawns[i], xy);
 				if (isValid == true) {
 					whitePawns[i].setX(xy[0]);
 					whitePawns[i].setY(xy[1]);
 				}
 				else {
-					System.out.println("Invalid move\n");
+					System.out.println("Retry\n");
 					return;
 				}
 			}
 			else if (piece.equals(blackPieces[i].getName())) {
 				check = true;
-				isValid = process(blackPieces[i], xy, blackPieces[i].getPossibleSquares(blackPieces[i].getX(), blackPieces[i].getY(), "Black"), blackPieces[i].getType());
+				isValid = process(blackPieces[i], xy);
 				if (isValid == true) {
 					blackPieces[i].setX(xy[0]);
 					blackPieces[i].setY(xy[1]);
 				}
 				else {
-					System.out.println("Invalid move\n");
+					System.out.println("Retry\n");
 					return;
 				}
 			}
 			else if (piece.equals(blackPawns[i].getName())){
 				check = true;
-				isValid = process(blackPawns[i], xy, blackPawns[i].getPossibleSquares(blackPawns[i].getX(), blackPawns[i].getY(), "Black"), blackPawns[i].getType());
+				isValid = process(blackPawns[i], xy);
 				if (isValid == true) {
 					blackPawns[i].setX(xy[0]);
 					blackPawns[i].setY(xy[1]);
 				}
 				else {
-					System.out.println("Invalid move\n");
+					System.out.println("Retry\n");
 					return;
 				}
 			}
@@ -182,16 +181,22 @@ public class Board {
 		
 	}
 	
-	Boolean process(Piece piece, int[] xy, String[] possibleSquares, String type) {
+	Boolean process(Piece piece, int[] xy) {
 		
 		moveValidity = false;
-		boolean check = false;
+		String[] possibleSquares = piece.getPossibleSquares(piece.getX(), piece.getY(), piece.getType());
+		boolean inputCheck = false;
 		int i = 0;		
 
+		for (int c =0;c<possibleSquares.length;c++) {
+			System.out.print(possibleSquares[c]+" ");
+		}
+		
+		
 		//Checks whether the players square choice matches a possible square
-		while ((check == false) && (i<possibleSquares.length)) {
+		while ((inputCheck == false) && (i<possibleSquares.length)) {
 			if ((Board.getSquareString(xy[0], xy[1])).equals(possibleSquares[i])) {
-				check = true;
+				inputCheck = true;
 			}
 			else {
 				i++;
@@ -199,46 +204,77 @@ public class Board {
 		}
 		System.out.println();
 		
-		if (check == false) {
+		//Piece move rule check
+		if (inputCheck == false) {
+			//Inputed square doesn't match with a possible square
 			moveValidity = false;
+			System.out.println("Invalid Square");
 		}
 		else {
-			
-			//Checking for occupancy of input square
-			if (squareOccupied[xy[0]][xy[1]] == true) {
-				
-				//Check whether the foreign piece is in the same team or not
-				if (squareOccupiedBy[xy[0]][xy[1]].getType().equals(piece.getType())) {
 					
-					//same team
+			//Other checks
+			
+			//Occupancy Check
+			if (squareOccupied[xy[0]][xy[1]] == true) { //Non-empty Square
+				
+				//Team (Friendly/Opponent) check
+				if (squareOccupiedBy[xy[0]][xy[1]].getType().equals(piece.getType())) { //Same (friendly) team	
+					moveValidity = false;
+					System.out.println("Square Blocked By Friendly Piece");
+				}
+				else { //Opponent team
+					
+					moveValidity = true;
+					
+					//Path Clear check
+					if (obstacleCheck(piece,xy) == true) {
+						moveValidity = true;
+						System.out.println(piece.getName()+" to "+Board.getSquareString(xy[0], xy[1]));
+						
+						//Capture
+						squareOccupiedBy[xy[0]][xy[1]].setDead(true);
+						System.out.println(squareOccupiedBy[xy[0]][xy[1]].getName()+" captured!");
+						
+						//Check for check-mate
+						if ((squareOccupiedBy[xy[0]][xy[1]].getClass().toString()).equals("class King")) {
+							kingDead = true;
+							setWinner(piece.getType());
+						}
+						
+					}
+					else {
+						//Path blocked
+						moveValidity = false;
+					}
+					
+				}
+				
+			}
+			else { //Empty Square
+				
+				//Path Clear check
+				if (obstacleCheck(piece,xy) == true) {
+					moveValidity = true;
+					System.out.println(piece.getName()+" to "+Board.getSquareString(xy[0], xy[1]));
+					
+				}
+				else {
+					//Path blocked
 					moveValidity = false;
 				}
-				else { //opponent capture
-					moveValidity = true;
-					squareOccupiedBy[xy[0]][xy[1]].setDead(true);
-					System.out.println(piece.getName()+" to "+Board.getSquareString(xy[0], xy[1]));
-					System.out.println(squareOccupiedBy[xy[0]][xy[1]].getName()+" captured!");
-					//Check for check-mate
-					if ((squareOccupiedBy[xy[0]][xy[1]].getClass().toString()).equals("class King")) {
-						kingDead = true;
-						setWinner(piece.getType());
-					}
-				}
-			}
-			else {
-				//Empty square
-				moveValidity = true;
-				System.out.println(piece.getName()+" to "+Board.getSquareString(xy[0], xy[1]));
-			} 
+
+			}	
+			
 		}
+		
 		
 		return moveValidity;
 		
 		/* Must consider:
-		 * - whether the square is occupied by a friendly piece or foe
+		 * - whether the square is occupied by a friendly piece or foe |
 		 * - obstacle pieces
-		 * - isDead?
-		 * - King killed?
+		 * - isDead? |
+		 * - King killed? |
 		 */
 	}
 
@@ -257,6 +293,7 @@ public class Board {
 	public static void setWinner(String winner) {
 		Board.winner = winner;
 	}
+	
 
 	public String[] getPieceNames() {
 
@@ -316,4 +353,142 @@ public class Board {
 		
 		return squareName;
 	}
+
+
+	public static int[] getSquareCoordinate(String squareString) {
+		
+		int[] square  = new int[2];
+		
+		//Retrieve x
+		
+		switch (squareString.charAt(0))  {
+		case 'A': square[0] = 0;
+		break;
+		case 'B': square[0] = 1;
+		break;
+		case 'C': square[0] = 2;
+		break;
+		case 'D': square[0] = 3;
+		break;
+		case 'E': square[0] = 4;
+		break;
+		case 'F': square[0] = 5;
+		break;
+		case 'G': square[0] = 6;
+		break;
+		case 'H': square[0] = 7;
+		break;
+		}
+		
+		//Retrieve y
+		
+		square[1] = squareString.charAt(1)+0;
+		
+		return square;
+	}
+	
+	private boolean obstacleCheck(Piece piece, int xy[]) {
+		
+		//For everything other than Knights (or jumping pieces)
+		
+		boolean obstacleCheck = false;
+		int obstacle=0;
+		
+		if (piece.isCanJump()==false) {
+			
+			//1 = positive direction (right/up), -1 = negative direction (left/down), 0 = no movement in that axis
+			int dirX,dirY;
+			
+			
+			//dirX
+			if (piece.getX()<xy[0]) {
+				dirX = 1;
+			}
+			else if (piece.getX()>xy[0]) {
+				dirX = -1;
+			}
+			else {
+				dirX = 0;
+			}
+			
+			//dirY
+			if (piece.getY()<xy[1]) {
+				dirY = 1;
+			}
+			else if (piece.getY()>xy[1]) {
+				dirY = -1;
+			}
+			else {
+				dirY = 0;
+			}
+			
+			
+			if(dirX != 0) { //Every movement but vertical				
+				
+				if (squareOccupied[piece.getX()+(dirX)][piece.getY()+(dirY)] == true) { 
+					
+					if (squareOccupiedBy[piece.getX()+(dirX)][piece.getY()+(dirY)].getType().equals(piece.getType())) {
+						obstacle++;
+						obstacleCheck=false;
+						System.out.println("Obstacle Detected");
+					}
+					else {
+						obstacleCheck = true; //Opponent can be captured
+					}
+				
+				}
+				else {
+					
+					for (int b =1 ;b< Math.abs(piece.getX()-xy[0]) - 1;++b) { 
+						if (squareOccupied[piece.getX()+(dirX*b)][piece.getY()+(dirY*b)] == true) { 
+							obstacle++;
+							obstacleCheck=false;
+							System.out.println("Obstacle Detected");
+						}
+						
+					}
+				}
+			}
+			else { //Vertical only movement
+				
+				if (squareOccupied[piece.getX()+(dirX)][piece.getY()+(dirY)] == true) { 
+						
+					if (squareOccupiedBy[piece.getX()+(dirX)][piece.getY()+(dirY)].getType().equals(piece.getType())) {
+						obstacle++;
+						obstacleCheck=false;
+						System.out.println("Obstacle Detected");
+					}
+					else {
+						obstacleCheck = true; //Opponent can be captured
+					}
+					
+				}
+				else {
+					
+					for (int b =1 ;b< Math.abs(piece.getY()-xy[1]) - 1;++b) { 
+						if (squareOccupied[piece.getX()+(dirX*b)][piece.getY()+(dirY*b)] == true) { 
+							obstacle++;
+							obstacleCheck=false;
+							System.out.println("Obstacle Detected");
+						}
+						
+					}
+				}
+					
+			}
+			
+		}
+		else {
+			obstacleCheck = true; 
+			System.out.println("Obstacle Jumped");
+		}
+		
+		if (obstacle ==0) {
+			obstacleCheck = true;
+		}
+
+		return obstacleCheck;
+		
+	}
+	
 }

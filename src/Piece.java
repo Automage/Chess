@@ -6,13 +6,15 @@ public abstract class Piece {
 	int x;
 	int y;
 	boolean isDead = false;
+	boolean canJump;
 	
 
-	public Piece(String name, int x, int y, String type) {
+	public Piece(String name, int x, int y, String type, boolean canJump) {
 		this.name = name;
 		this.type = type;
 		this.x = x;
 		this.y = y;
+		this.canJump = canJump;
 		
 	}
 
@@ -56,6 +58,14 @@ public abstract class Piece {
 		this.isDead = isDead;
 	}
 	
+	public boolean isCanJump() {
+		return canJump;
+	}
+
+	public void setCanJump(boolean canJump) {
+		this.canJump = canJump;
+	}
+
 	//Only looks at position and outputs possible moves without considering other pieces
 	public abstract String[] getPossibleSquares(int x, int y, String type);
 	

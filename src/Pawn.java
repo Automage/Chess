@@ -3,7 +3,7 @@ import java.util.*;
 public class Pawn extends Piece{
 
 	public Pawn(String name, int x, int y, String type) {
-		super(name,x,y,type);
+		super(name,x,y,type,false);
 	}
 
 	@Override

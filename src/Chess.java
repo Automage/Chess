@@ -12,7 +12,7 @@ public class Chess {
 		Board board = new Board();
 		boolean kingDown = false;
 		boolean proceed = false;
-		int turn = 1;
+		int turn = 0;
 		//Creating Players
 		Player playerWhite = new Player("White");
 		Player playerBlack = new Player("Black");
@@ -29,7 +29,9 @@ public class Chess {
 		//GAME START
 		while (kingDown == false) {
 			
-			System.out.println("\nTurn "+turn);
+			if (turn!=0) {
+				System.out.println("\nTurn "+turn+" Summary");
+			}
 			board.update();
 			board.draw();
 			proceed = false;
@@ -48,7 +50,7 @@ public class Chess {
 			if (kingDown == false) {
 				
 				turn++;
-				System.out.println("\nTurn "+turn);
+				System.out.println("\nTurn "+turn+" Summary");
 				board.update();
 				board.draw();
 				proceed = false;	
