@@ -1,12 +1,16 @@
 # Chess
 Trying my hand at building Chess in Java using my knowledge of OOP so far. 
 
-#Running the Runnable JAR file 
-(assuming you have a java installed)
+---
+
+Running the Runnable JAR file (assuming you have a java installed):
+
 MacOS:
 1) Open Terminal 
-2) Type in 'java -jar *jar destination*' (For example: java -jar /Users/Automage/Desktop/Chess.jar) (alternatively you could drag the jar file into the Terminal window to insert its destination automatically)
+2) Type in 'java -jar *jardestination*' (For example: java -jar /Users/Automage/Desktop/Chess.jar) (Alternatively you could drag the jar file into the Terminal window to insert its destination automatically)
 3) Profit
+
+---
 
 Pre-Completion 1.0:
 - Abstract class 'Piece' created 
