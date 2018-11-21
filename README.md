@@ -8,7 +8,7 @@ Running the Runnable JAR file (assuming you have a java installed):
 MacOS:
 1) Open Terminal 
 2) Type in 'java -jar *jardestination*' (For example: java -jar /Users/Automage/Desktop/Chess.jar) (Alternatively you could drag the jar file into the Terminal window to insert its destination automatically)
-3) Profit
+3) !!!
 
 ---
 
